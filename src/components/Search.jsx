@@ -4,11 +4,12 @@ import axios from "axios";
 import SearchSelect from "./SearchSelect";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import ResponseItems from "./ResponseItems";
 
 const Search = () => {
   const [searchType, setSearchType] = useState("character");
   const [searchTerm, setSearchTerm] = useState("");
-  const [responseItems, setResponseItems] = useState([]);
+  const [responseData, setResponseData] = useState([]);
 
   const handleSelectChange = (selectedValue) => {
     setSearchType(selectedValue);
@@ -27,7 +28,7 @@ const Search = () => {
         `https://rickandmortyapi.com/api/${searchType}/?name=${searchTerm}`
       );
       console.log(response.data.results);
-      setResponseItems(response.data.results);
+      setResponseData(response.data.results);
     } catch (error) {
       console.error("Error fetching characters:", error);
     }
@@ -45,14 +46,8 @@ const Search = () => {
       <Button variant="outline" onClick={handleSearch}>
         Search
       </Button>
-      <div>
-        <h2>Characters</h2>
-        <ul>
-          {responseItems.map((character) => (
-            <li key={character.id}>{character.name}</li>
-          ))}
-        </ul>
-      </div>
+
+      <ResponseItems responseData={responseData} searchTyp={searchType} />
     </div>
   );
 };
