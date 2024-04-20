@@ -21,12 +21,14 @@ const Search = () => {
         // Verifica se a resposta possui resultados
         if (!response.data.results || response.data.results.length === 0) {
           setError(`Not Found ${searchTerm} in ${searchType}`); // Define a mensagem de erro
+          setResponseData([]); // Limpa os dados de resposta
         } else {
           setResponseData(response.data.results);
           setError(null); // Limpa a mensagem de erro
         }
       } catch (error) {
-        setError(`Not Found ${searchTerm} in ${searchType}`); // Define a mensagem de erro em caso de erro na requisição
+        setError(`Error fetching data for ${searchTerm} in ${searchType}`); // Define a mensagem de erro em caso de erro na requisição
+        setResponseData([]); // Limpa os dados de resposta
       }
     };
 
@@ -45,6 +47,7 @@ const Search = () => {
   return (
     <div className="flex flex-col gap-3 m-auto bg-neutral-800 w-[90%] mt-8 p-4 rounded-xl">
       <SearchSelect onSelectChange={handleSelectChange} />
+
       <Input
         type="text"
         placeholder="Enter a search term"
