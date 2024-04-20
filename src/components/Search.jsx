@@ -1,5 +1,4 @@
-// Search.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchSelect from "./SearchSelect";
 import { Button } from "./ui/button";
@@ -11,27 +10,31 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [responseData, setResponseData] = useState([]);
 
+  useEffect(() => {
+    // Define uma função assíncrona para buscar os dados quando searchTerm ou searchType mudarem
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://rickandmortyapi.com/api/${searchType}/?name=${searchTerm}`
+        );
+        console.log(response.data.results);
+        setResponseData(response.data.results);
+      } catch (error) {
+        console.error("Error fetching characters:", error);
+      }
+    };
+
+    // Chama a função fetchData quando searchTerm ou searchType mudarem
+    fetchData();
+  }, [searchTerm, searchType]); // Array de dependências para o useEffect
+
   const handleSelectChange = (selectedValue) => {
     setSearchType(selectedValue);
-    // console.log("Selected search type:", selectedValue);
   };
 
   const handleInputChange = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
-    // console.log("Search term:", term);
-  };
-
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(
-        `https://rickandmortyapi.com/api/${searchType}/?name=${searchTerm}`
-      );
-      console.log(response.data.results);
-      setResponseData(response.data.results);
-    } catch (error) {
-      console.error("Error fetching characters:", error);
-    }
   };
 
   return (
@@ -43,10 +46,6 @@ const Search = () => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-      <Button variant="outline" onClick={handleSearch}>
-        Search
-      </Button>
-
       <ResponseItems responseData={responseData} searchType={searchType} />
     </div>
   );

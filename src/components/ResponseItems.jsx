@@ -12,8 +12,6 @@ const ResponseItems = ({ responseData, searchType }) => {
         return <EpisodeCard key={data.id} data={data} />;
       case "location":
         return <LocationCard key={data.id} data={data} />;
-      default:
-        return null;
     }
   };
 
