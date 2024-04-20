@@ -2,6 +2,7 @@ const CharacterCard = ({ data }) => {
   return (
     <div key={data.id}>
       <img src={data.image} className="item-image" alt={data.name} />
+      <h2>{data.name}</h2>
       <p className="episodes">Total episodes - {data.episode.length}</p>
       <p className={data.status === "Dead" ? "status dead" : "status"}>
         Status - {data.status}
