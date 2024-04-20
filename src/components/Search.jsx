@@ -13,13 +13,13 @@ const Search = () => {
 
   const handleSelectChange = (selectedValue) => {
     setSearchType(selectedValue);
-    console.log("Selected search type:", selectedValue);
+    // console.log("Selected search type:", selectedValue);
   };
 
   const handleInputChange = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
-    console.log("Search term:", term);
+    // console.log("Search term:", term);
   };
 
   const handleSearch = async () => {
@@ -47,7 +47,7 @@ const Search = () => {
         Search
       </Button>
 
-      <ResponseItems responseData={responseData} searchTyp={searchType} />
+      <ResponseItems responseData={responseData} searchType={searchType} />
     </div>
   );
 };
