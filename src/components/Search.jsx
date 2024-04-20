@@ -9,24 +9,29 @@ const Search = () => {
   const [searchType, setSearchType] = useState("character");
   const [searchTerm, setSearchTerm] = useState("");
   const [responseData, setResponseData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Define uma função assíncrona para buscar os dados quando searchTerm ou searchType mudarem
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `https://rickandmortyapi.com/api/${searchType}/?name=${searchTerm}`
         );
-        console.log(response.data.results);
-        setResponseData(response.data.results);
+
+        // Verifica se a resposta possui resultados
+        if (!response.data.results || response.data.results.length === 0) {
+          setError(`Not Found ${searchTerm} in ${searchType}`); // Define a mensagem de erro
+        } else {
+          setResponseData(response.data.results);
+          setError(null); // Limpa a mensagem de erro
+        }
       } catch (error) {
-        console.error("Error fetching characters:", error);
+        setError(`Not Found ${searchTerm} in ${searchType}`); // Define a mensagem de erro em caso de erro na requisição
       }
     };
 
-    // Chama a função fetchData quando searchTerm ou searchType mudarem
     fetchData();
-  }, [searchTerm, searchType]); // Array de dependências para o useEffect
+  }, [searchTerm, searchType]);
 
   const handleSelectChange = (selectedValue) => {
     setSearchType(selectedValue);
@@ -46,7 +51,11 @@ const Search = () => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-      <ResponseItems responseData={responseData} searchType={searchType} />
+      {error ? ( // Verifica se há um erro
+        <p>{error}</p> // Exibe a mensagem de erro
+      ) : (
+        <ResponseItems responseData={responseData} searchType={searchType} />
+      )}
     </div>
   );
 };
