@@ -45,12 +45,13 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 m-auto bg-neutral-800 w-[90%] mt-8 p-4 rounded-xl">
+    <div className="flex flex-col gap-3 m-auto bg-[#131316] w-[90%] my-8 p-4 rounded-xl text-neutral-200 ">
       <SearchSelect onSelectChange={handleSelectChange} />
 
       <Input
         type="text"
         placeholder="Enter a search term"
+        className="text-center"
         value={searchTerm}
         onChange={handleInputChange}
       />

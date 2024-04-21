@@ -3,7 +3,7 @@ import Search from "./components/Search";
 
 function App() {
   return (
-    <div>
+    <div className="bg-background">
       <Header />
       <Search />
     </div>

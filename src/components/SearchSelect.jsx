@@ -7,7 +7,7 @@ const SearchSelect = ({ onSelectChange }) => {
   return (
     <select
       id="searchType"
-      className="p-3 rounded-md text-sm"
+      className="flex h-10 w-full rounded-md text-center text-base border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       onChange={handleSelectChange}
     >
       <option value="character">Character</option>
