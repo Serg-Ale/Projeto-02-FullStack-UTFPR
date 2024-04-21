@@ -6,7 +6,7 @@ const CharacterCard = ({ data }) => {
         <h2 className="text-3xl font-bold group-hover:text-primary">
           {data.name}
         </h2>
-        <p className="episodes">Total episodes - {data.episode.length}</p>
+        <p className="episodes">Total episodes - {data.episode?.length}</p>
         <p
           className={
             data.status === "Dead"
