@@ -2,8 +2,10 @@ const CharacterCard = ({ data }) => {
   return (
     <>
       <img src={data.image} alt={data.name} className="rounded-3xl p-1" />
-      <div className="p-3 text-center text-xl">
-        <h2 className="text-3xl font-bold">{data.name}</h2>
+      <div className="p-3 text-center text-xl ">
+        <h2 className="text-3xl font-bold group-hover:text-primary">
+          {data.name}
+        </h2>
         <p className="episodes">Total episodes - {data.episode.length}</p>
         <p
           className={
