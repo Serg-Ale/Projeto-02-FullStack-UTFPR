@@ -2,16 +2,29 @@ import React from "react";
 import CharacterCard from "./CharacterCard";
 import EpisodeCard from "./EpisodeCard";
 import LocationCard from "./LocationCard";
+import CardContainer from "./CardContainer";
 
 const ResponseItems = ({ responseData, searchType }) => {
   const renderCard = (data) => {
     switch (searchType) {
       case "character":
-        return <CharacterCard key={data.id} data={data} />;
+        return (
+          <CardContainer key={data.id}>
+            <CharacterCard data={data} />{" "}
+          </CardContainer>
+        );
       case "episode":
-        return <EpisodeCard key={data.id} data={data} />;
+        return (
+          <CardContainer key={data.id}>
+            <EpisodeCard key={data.id} data={data} />;
+          </CardContainer>
+        );
       case "location":
-        return <LocationCard key={data.id} data={data} />;
+        return (
+          <CardContainer key={data.id}>
+            <LocationCard key={data.id} data={data} />
+          </CardContainer>
+        );
     }
   };
 
