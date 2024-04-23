@@ -29,7 +29,7 @@ const ResponseItems = ({ responseData, searchType }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4  bg-[#131316] rounded-3xl">
+    <div className="flex flex-col gap-6 mt-4  bg-[#131316] rounded-3xl">
       {responseData.map((data) => renderCard(data))}
     </div>
   );

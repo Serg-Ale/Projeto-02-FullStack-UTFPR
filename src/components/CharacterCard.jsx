@@ -1,8 +1,8 @@
 const CharacterCard = ({ data }) => {
   return (
     <>
-      <img src={data.image} alt={data.name} className="rounded-3xl p-1" />
-      <div className="p-3 text-center text-xl ">
+      <img src={data.image} alt={data.name} className="rounded-3xl p-1 sm:w-60" />
+      <div className="flex flex-col p-3 text-center text-xl m-auto ">
         <h2 className="text-3xl font-bold group-hover:text-primary">
           {data.name}
         </h2>

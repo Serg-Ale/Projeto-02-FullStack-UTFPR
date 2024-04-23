@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchSelect from "./SearchSelect";
-import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import ResponseItems from "./ResponseItems";
 
@@ -45,7 +44,7 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 m-auto bg-[#131316] w-[90%] my-8 p-4 rounded-xl text-neutral-200 ">
+    <div className="flex flex-col gap-3 m-auto bg-[#131316] min-w-[360px] w-[90%] md:max-w-[60%] md:min-w-[740px] my-8 p-4 rounded-xl text-neutral-200 ">
       <SearchSelect onSelectChange={handleSelectChange} />
 
       <Input
