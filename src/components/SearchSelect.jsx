@@ -6,6 +6,7 @@ const SearchSelect = ({ onSelectChange }) => {
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
     setSearchSelect(selectedValue);
+    console.log(selectedValue);
   };
 
   return (

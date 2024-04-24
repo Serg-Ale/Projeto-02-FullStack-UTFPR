@@ -12,7 +12,6 @@ const Search = () => {
     searchSelect,
     searchInput,
     setSearchInput,
-    responseData,
     setResponseData,
     error,
     setError,
@@ -57,11 +56,7 @@ const Search = () => {
         onChange={handleInputChange}
         value={searchInput}
       />
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <ResponseItems responseData={responseData} searchType={searchSelect} />
-      )}
+      {error ? <p>{error}</p> : <ResponseItems />}
     </div>
   );
 };
