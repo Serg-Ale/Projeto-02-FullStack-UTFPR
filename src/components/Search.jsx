@@ -41,6 +41,10 @@ const Search = () => {
     fetchData();
   }, [searchInput, searchSelect]);
 
+  const handleInputChange = (event) => {
+    const term = event.target.value;
+    setSearchInput(term);
+  };
 
   return (
     <div className="flex flex-col gap-3 m-auto bg-[#131316] min-w-[360px] w-[90%] md:max-w-[60%] md:min-w-[740px] my-8 p-4 rounded-xl text-neutral-200 ">
@@ -50,6 +54,7 @@ const Search = () => {
         type="text"
         placeholder="Enter a search term"
         className="text-center"
+        onChange={handleInputChange}
         value={searchInput}
       />
       {error ? (
