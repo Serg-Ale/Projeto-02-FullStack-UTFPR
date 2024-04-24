@@ -5,8 +5,8 @@ import { Input } from "./ui/input";
 import ResponseItems from "./ResponseItems";
 
 const Search = () => {
-  const [searchType, setSearchType] = useState("character");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchSelect, setSearchSelect] = useState("character");
+  const [searchInput, setSearchInput] = useState("");
   const [responseData, setResponseData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -14,33 +14,33 @@ const Search = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://rickandmortyapi.com/api/${searchType}/?name=${searchTerm}`
+          `https://rickandmortyapi.com/api/${searchSelect}/?name=${searchInput}`
         );
 
         // Verifica se a resposta possui resultados
         if (!response.data.results || response.data.results.length === 0) {
-          setError(`Not Found ${searchTerm} in ${searchType}`); // Define a mensagem de erro
+          setError(`Not Found ${searchInput} in ${searchSelect}`); // Define a mensagem de erro
           setResponseData([]); // Limpa os dados de resposta
         } else {
           setResponseData(response.data.results);
           setError(null); // Limpa a mensagem de erro
         }
       } catch (error) {
-        setError(`Error fetching data for ${searchTerm} in ${searchType}`); // Define a mensagem de erro em caso de erro na requisição
+        setError(`Error fetching data for ${searchInput} in ${searchSelect}`); // Define a mensagem de erro em caso de erro na requisição
         setResponseData([]); // Limpa os dados de resposta
       }
     };
 
     fetchData();
-  }, [searchTerm, searchType]);
+  }, [searchInput, searchSelect]);
 
   const handleSelectChange = (selectedValue) => {
-    setSearchType(selectedValue);
+    setSearchSelect(selectedValue);
   };
 
   const handleInputChange = (event) => {
     const term = event.target.value;
-    setSearchTerm(term);
+    setSearchInput(term);
   };
 
   return (
@@ -51,13 +51,13 @@ const Search = () => {
         type="text"
         placeholder="Enter a search term"
         className="text-center"
-        value={searchTerm}
+        value={searchInput}
         onChange={handleInputChange}
       />
       {error ? ( // Verifica se há um erro
         <p>{error}</p> // Exibe a mensagem de erro
       ) : (
-        <ResponseItems responseData={responseData} searchType={searchType} />
+        <ResponseItems responseData={responseData} searchType={searchSelect} />
       )}
     </div>
   );
