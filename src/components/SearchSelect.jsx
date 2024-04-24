@@ -1,7 +1,11 @@
+import { useSearchContext } from "@/context/SearchContext";
+
 const SearchSelect = ({ onSelectChange }) => {
+  const { setSearchSelect } = useSearchContext();
+
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
-    onSelectChange(selectedValue);
+    setSearchSelect(selectedValue);
   };
 
   return (
