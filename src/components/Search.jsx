@@ -1,4 +1,3 @@
-// Search.jsx
 import React, { useEffect } from "react";
 import axios from "axios";
 import SearchSelect from "./SearchSelect";
@@ -19,6 +18,12 @@ const Search = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!searchInput) {
+        setResponseData([]);
+        setError(null);
+        return;
+      }
+
       try {
         const response = await axios.get(
           `https://rickandmortyapi.com/api/${searchSelect}/?name=${searchInput}`
