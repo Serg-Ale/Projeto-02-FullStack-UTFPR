@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import SearchSelect from "./SearchSelect";
 import { Input } from "./ui/input";
 import ResponseItems from "./ResponseItems";
-
 import { useSearchContext } from "@/context/SearchContext";
+import { useDataFetching } from "@/hooks/useDataFetching";
+import { useInputChange } from "@/hooks/useInputChange";
 
 const Search = () => {
   const {
@@ -17,44 +17,19 @@ const Search = () => {
     setError,
   } = useSearchContext();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!searchInputValue) {
-        setResponseData([]);
-        setError(null);
-        return;
-      }
+  const [showSearchHistory, setShowSearchHistory] = useState(true);
 
-      try {
-        const response = await axios.get(
-          `https://rickandmortyapi.com/api/${searchSelect}/?name=${searchInputValue}`
-        );
+  useDataFetching(searchSelect, searchInputValue, setResponseData, setError);
 
-        if (!response.data.results || response.data.results.length === 0) {
-          setError(`Not Found ${searchInputValue} in ${searchSelect}`);
-          setResponseData([]);
-        } else {
-          setResponseData(response.data.results);
-          setError(null);
-        }
-      } catch (error) {
-        setError(
-          `Error fetching data for ${searchInputValue} in ${searchSelect}`
-        );
-        setResponseData([]);
-      }
-    };
-
-    fetchData();
-  }, [searchInputValue, searchSelect]);
-
-  const handleInputChange = (event) => {
-    const term = event.target.value;
-    setSearchInput(term);
-  };
+  const handleInputChange = useInputChange(setSearchInput);
 
   const clearSearchHistory = () => {
     setSearchInput("");
+    setShowSearchHistory(false); // Hide search history when cleared
+  };
+
+  const onNewSearch = () => {
+    setShowSearchHistory(true); // Show search history for new searches
   };
 
   return (
@@ -65,17 +40,24 @@ const Search = () => {
         type="text"
         placeholder="Enter a search term"
         className="text-center"
-        onChange={handleInputChange}
+        onChange={(event) => {
+          handleInputChange(event);
+          onNewSearch(); // Show search history for new searches
+        }}
         value={searchInputValue}
       />
       {error ? <p>{error}</p> : <ResponseItems />}
-      <p>Search History:</p>
-      <ul>
-        {memoizedSearchHistory.map((term, index) => (
-          <li key={index}>{term}</li>
-        ))}
-      </ul>
-      <button onClick={clearSearchHistory}>Clear Search History</button>
+      {showSearchHistory && (
+        <>
+          <p>Search History:</p>
+          <ul>
+            {memoizedSearchHistory.map((term, index) => (
+              <li key={index}>{term}</li>
+            ))}
+          </ul>
+          <button onClick={clearSearchHistory}>Clear Search History</button>
+        </>
+      )}
     </div>
   );
 };
