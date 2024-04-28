@@ -9,20 +9,10 @@ export const SearchProvider = ({ children }) => {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [responseData, setResponseData] = useState([]);
   const [error, setError] = useState(null);
-  const [searchHistory, setSearchHistory] = useState([]);
 
   const setSearchInput = (term) => {
     setSearchInputValue(term);
-
-    if (!searchHistory.includes(term)) {
-      setSearchHistory((prevHistory) => [...prevHistory, term]);
-    }
   };
-
-  const memoizedSearchHistory = useMemo(
-    () => [...searchHistory],
-    [searchHistory]
-  );
 
   return (
     <SearchContext.Provider
@@ -35,8 +25,6 @@ export const SearchProvider = ({ children }) => {
         setResponseData,
         error,
         setError,
-        searchHistory,
-        memoizedSearchHistory,
       }}
     >
       {children}
