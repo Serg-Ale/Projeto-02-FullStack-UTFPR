@@ -1,5 +1,7 @@
 # Projeto 2 - Desenvolvimento da Camada Frontend com React.js
 
+
+
 ## Descrição do Projeto
 
 O Projeto 2 da disciplina Programação Web Fullstack consiste no desenvolvimento da camada Frontend de uma aplicação web utilizando a biblioteca React.js. Este projeto visa reimplantar as funcionalidades desenvolvidas no Projeto 1, porém utilizando React.js.
@@ -14,6 +16,9 @@ Cada equipe deve utilizar a mesma API JSON Aberta que foi utilizada no projeto a
 4. **Acesse a Aplicação:** Abra seu navegador e visite `http://localhost:3000`
 
 ## Detalhes da Implementação
+
+### Link para o projeto
+[https://serg-ale.github.io/Projeto-02-FullStack-UTFPR/](https://serg-ale.github.io/Projeto-02-FullStack-UTFPR/)
 
 ### Principais componentes React
 
