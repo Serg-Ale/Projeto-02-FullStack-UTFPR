@@ -9,8 +9,9 @@ import { useSearchContext } from "@/context/SearchContext";
 const Search = () => {
   const {
     searchSelect,
-    searchInput,
+    searchInputValue,
     setSearchInput,
+    memoizedSearchHistory,
     setResponseData,
     error,
     setError,
@@ -18,7 +19,7 @@ const Search = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!searchInput) {
+      if (!searchInputValue) {
         setResponseData([]);
         setError(null);
         return;
@@ -26,28 +27,34 @@ const Search = () => {
 
       try {
         const response = await axios.get(
-          `https://rickandmortyapi.com/api/${searchSelect}/?name=${searchInput}`
+          `https://rickandmortyapi.com/api/${searchSelect}/?name=${searchInputValue}`
         );
 
         if (!response.data.results || response.data.results.length === 0) {
-          setError(`Not Found ${searchInput} in ${searchSelect}`);
+          setError(`Not Found ${searchInputValue} in ${searchSelect}`);
           setResponseData([]);
         } else {
           setResponseData(response.data.results);
           setError(null);
         }
       } catch (error) {
-        setError(`Error fetching data for ${searchInput} in ${searchSelect}`);
+        setError(
+          `Error fetching data for ${searchInputValue} in ${searchSelect}`
+        );
         setResponseData([]);
       }
     };
 
     fetchData();
-  }, [searchInput, searchSelect]);
+  }, [searchInputValue, searchSelect]);
 
   const handleInputChange = (event) => {
     const term = event.target.value;
     setSearchInput(term);
+  };
+
+  const clearSearchHistory = () => {
+    setSearchInput("");
   };
 
   return (
@@ -59,9 +66,16 @@ const Search = () => {
         placeholder="Enter a search term"
         className="text-center"
         onChange={handleInputChange}
-        value={searchInput}
+        value={searchInputValue}
       />
       {error ? <p>{error}</p> : <ResponseItems />}
+      <p>Search History:</p>
+      <ul>
+        {memoizedSearchHistory.map((term, index) => (
+          <li key={index}>{term}</li>
+        ))}
+      </ul>
+      <button onClick={clearSearchHistory}>Clear Search History</button>
     </div>
   );
 };
