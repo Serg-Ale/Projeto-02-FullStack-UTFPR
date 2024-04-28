@@ -125,8 +125,11 @@ Cada equipe deve utilizar a mesma API JSON Aberta que foi utilizada no projeto a
    - Funcionalidade: O resultado da busca é memoizado pelo `useMemo`, garantindo que os componentes sejam renderizados novamente apenas quando o conteúdo da requisição muda.
    - Implementação: Utilizado no hook `useDataFetching` para memoizar o resultado da busca de dados da API, melhorando a eficiência da aplicação.
 
-
-
+6. **Implementação de Bibliotecas:**
+   - **Tailwindcss:**
+     - Descrição: Utilizado para simplificar o desenvolvimento de estilos, o Tailwindcss oferece uma abordagem utility-first, permitindo a criação rápida e flexível de interfaces.
+   - **shadcn/UI:**
+     - Descrição: Esta biblioteca fornece uma coleção de componentes de interface de usuário prontos para uso, ajudando a acelerar o desenvolvimento de aplicações web.
 
 ## Autor
 
